@@ -12,16 +12,16 @@ import { Router } from '@angular/router';
 export class ReadTask implements OnInit{
 
   tasks:Task[];
-  router:Router;
-  constructor(private service: AppSingleton){}
+
+  constructor(private service: AppSingleton,private router: Router){}
   ngOnInit(){
     this.tasks = this.service.tasks;
   }
   deleteTask(i:number){
     this.tasks.splice(i,1);
   }
-  redirect(pagename: string) {
-    this.router.navigate(['/'+pagename]);
+  redirect(index :number) {
+    this.router.navigate(['updateTask',index]);
   }
 
 }
