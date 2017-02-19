@@ -3,10 +3,6 @@ import { Task } from './task';
 
 @Injectable()
 export class AppSingleton {
-  tasks:Task[] = [{
-    date : null,
-    description : 'love you',
-    title : 'by anuj',
-    priority : 'super high'}];
+  tasks:Task[] = [];
 }
 
