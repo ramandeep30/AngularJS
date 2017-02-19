@@ -1,13 +1,16 @@
-<form>
-  Date: <input type="text" name="date" >
-  <br>
-  Title: <input type="text" name="title" >
-  <br>
-  Description: <input type="text" name="description" >
-  <br>
-  <select name="priority">
-    <option value="high">High</option>
-    <option value="medium">Medium</option>
-    <option value="low">Low</option>
-  </select>
-</form>
+<div>
+  <form [formGroup]="addForm">
+    <input type="text" placeholder="Enter Id" formControlName="id" />
+    <input type="text" placeholder="Enter Title" formControlName="title"/>
+    <input type="text" placeholder="Enter Desciption" formControlName="description" />
+
+    <select name="Priority" formControlName="priority">
+      <option value="Low" >Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+    </select>
+    <br/>
+    <br/>
+    <button type="submit" (click)="addData()"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add User </button>
+  </form>
+</div>

@@ -7,10 +7,14 @@ import {DeleteAndUpdateTask} from "./deleteAndUpdate/deleteAndUpdate.component";
 import {ReadTask} from "./readTask/readTask.component";
 import {RouterModule} from "@angular/router";
 import {routes} from "./app.routes";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
+import {AppSingleton} from "./app.singletonService";
 
 @NgModule({
-  imports:      [ BrowserModule ,RouterModule.forRoot(routes)],
+  imports:      [ BrowserModule ,FormsModule, CommonModule, RouterModule.forRoot(routes), ReactiveFormsModule,],
   declarations: [ AppComponent, CreateTask, DeleteAndUpdateTask, ReadTask ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers:    [AppSingleton]
 })
 export class AppModule { }

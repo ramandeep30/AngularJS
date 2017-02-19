@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AppSingleton} from "../app.singletonService";
+import {Task} from "../task";
 
 @Component ({
   selector: 'read',
@@ -6,6 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['']
 })
 
-export class ReadTask {
+export class ReadTask implements OnInit{
+
+  tasks:Task[];
+  constructor(private service: AppSingleton){}
+  ngOnInit(){
+    this.tasks = this.service.tasks;
+  }
 
 }
