@@ -1,4 +1,5 @@
 export class Task {
+  _id: string;
   date: string;
   title: string;
   description: string;

@@ -1,15 +1,15 @@
 import {Routes} from '@angular/router'
-import { CreateTask } from "./createTask/createTask.component";
-import {ReadTask} from "./readTask/readTask.component";
-import {UpdateTask} from "./update-task/update.component";
+import { CreateTaskComponent } from "./createTask/createTask.component";
+import {ReadTaskComponent} from "./readTask/readTask.component";
+import {UpdateTaskComponent} from "./update-task/update.component";
 
 export const routes: Routes = [{
   path : 'createTask',
-  component: CreateTask
+  component: CreateTaskComponent
 },{
   path: 'readTask',
-  component: ReadTask
+  component: ReadTaskComponent
 },{
   path: 'updateTask/:id',
-  component: UpdateTask
+  component: UpdateTaskComponent
 }];
