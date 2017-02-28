@@ -5,10 +5,18 @@ export class Task {
   description: string;
   priority: string;
 
-  constructor(newDate?: string, newTitle?: string, newDescription?: string, newPriority?: string)  {
-    this.date = newDate;
-    this.description = newDescription;
-    this.priority = newPriority;
-    this.title = newTitle;
+  constructor(date?: string, title?: string, description?: string, priority?: string) {
+    if(date && title && description && priority) {
+      this.date = date;
+      this.title = title;
+      this.description = description;
+      this.priority = priority;
+    }
+    else {
+      this.date = '';
+      this.title = '';
+      this.description = '';
+      this.priority = '';
+    }
   }
 }

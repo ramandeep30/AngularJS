@@ -2,20 +2,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import {RouterOutletMap, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {HttpModule} from "@angular/http";
 import {RouterTestingModule} from "@angular/router/testing";
 import {Observable} from "rxjs/Observable";
 import {AppSingleton} from "../app.singletonService";
 import 'rxjs/add/observable/of'
-import {ReadTaskComponent} from "./readTask.component";
+import {UpdateTaskComponent} from "./update.component";
 import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
-describe('Readtask component', function () {
+
+describe('UpdateTask component', function () {
   let de: DebugElement;
-  let comp: ReadTaskComponent;
-  let fixture: ComponentFixture<ReadTaskComponent>;
+  let comp: UpdateTaskComponent;
+  let fixture: ComponentFixture<UpdateTaskComponent>;
   let service: AppSingleton;
   class MockRouter {
     navigate(){
@@ -23,26 +24,31 @@ describe('Readtask component', function () {
     }
   }
 
+  class MockActivatedRouter {
+    params = Observable.of<any>({'id': 1})
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ReadTaskComponent],
-      providers: [RouterOutletMap, {provide: Router, useClass: MockRouter}, AppSingleton],
+      declarations: [UpdateTaskComponent],
+      providers: [{provide: ActivatedRoute, useClass: MockActivatedRouter}, AppSingleton],
       imports: [RouterTestingModule, HttpModule, CommonModule, FormsModule]
 
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReadTaskComponent);
+    fixture = TestBed.createComponent(UpdateTaskComponent);
     comp = fixture.componentInstance;
     de = fixture.debugElement.query(By.css('h1'));
     service = fixture.debugElement.injector.get(AppSingleton)
   });
 
-  it('should be able to get data from service', () => {
-    spyOn(service, 'showTask').and.returnValue(
+  it('should be able to modify data from service', () => {
+    spyOn(service, 'updateTask').and.returnValue(
       Observable.of<any>(
         [{
+          _id: '',
           date: '',
           title: '',
           description: '',
@@ -50,8 +56,9 @@ describe('Readtask component', function () {
         }]
       )
     );
-    comp.ngOnInit();
+    comp.addData('','','','');
     expect(comp.tasks).toEqual([{
+      _id: '',
       date: '',
       title: '',
       description: '',
@@ -60,26 +67,4 @@ describe('Readtask component', function () {
 
   });
 
-  it('should be able to delete data from service', () => {
-    spyOn(service, 'deleteTask').and.returnValue(
-      Observable.of<any>(
-        [{
-          date: '',
-          title: '',
-          description: '',
-          priority: ''
-        }]
-      )
-    );
-
-    comp.deleteTask('1');
-    expect(comp.deletedTask).toEqual([{
-      date: '',
-      title: '',
-      description: '',
-      priority: ''
-    }])
-
-  });
-
-});
+ });

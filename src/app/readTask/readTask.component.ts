@@ -19,6 +19,7 @@ import {Http, Headers} from "@angular/http";
 export class ReadTaskComponent implements OnInit{
 
   tasks:Task[];
+  deletedTask:Task[];
 
   constructor(private service: AppSingleton, private router: Router, private http:Http){
 
@@ -30,25 +31,29 @@ export class ReadTaskComponent implements OnInit{
     }, error => {
       alert(error)
     });
-      //this.service.tasks;
   }
 
 
 
   deleteTask(i: string){
     this.service.deleteTask(i).subscribe(data => {
+      this.deletedTask=data
       alert(JSON.stringify(data))
     }, error => {
       alert(error)
-    })
-    location.reload();
+    });
+    this.service.showTask().subscribe(data => {
+      this.tasks =data;
+      alert(JSON.stringify(data));
+    }, error => {
+      alert(error)
+    });
   }
 
 
 
 
   redirect(index :string) {
-    console.log('-----------', JSON.stringify(this.tasks))
     this.router.navigate(['updateTask',index]);
   }
 

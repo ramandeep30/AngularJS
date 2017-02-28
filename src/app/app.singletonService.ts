@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
-import { Router } from '@angular/router';
 import {Observable} from "rxjs/Observable"
 import "rxjs/add/observable/of";
 import "rxjs/add/operator/map";
@@ -10,9 +9,15 @@ import {Http, Headers} from "@angular/http";
 
 @Injectable()
 export class AppSingleton {
-  tasks:Task[] = [];
+  tasks:Task[] = [{
+    _id: '',
+    date: '',
+    title: '',
+    description: '',
+    priority: ''
+  }];
 
-  constructor(private router: Router,private http:Http){}
+  constructor(private http:Http){}
 
   addTask(t:Task):Observable<any>{
     let jsonHeader = new Headers({
@@ -47,7 +52,7 @@ export class AppSingleton {
     });
 
     let obj = {
-      _id: id,
+      _id: t._id,
       date: t.date,
       title: t.title,
       description: t.description,
@@ -86,4 +91,3 @@ export class AppSingleton {
   }
 
 }
-
